@@ -811,6 +811,22 @@ class Settings(object):
         ),
         'player': (
             T(32940, 'Player UI'), (
+                OptionsSetting('auto_skip_fixed_duration', T(42814, 'Auto-skip fixed duration at start'), 0, [(0, T(32481, 'Off'))] + [(sec, T(33091).format(sec_or_ms=sec, unit_s_or_ms="s")) for sec in [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]]).description(T(42815, 'Automatically skip a fixed number of seconds at the beginning of videos. Set to 0 to disable.')),
+                OptionsSetting(  
+                    'playback_speed', T(42818, 'Default playback speed'), '1.0',  
+                    (  
+                        ('0.8', '0.8x'),  
+                        ('0.9', '0.9x'),  
+                        ('1.0', '1.0x (Normal)'),  
+                        ('1.1', '1.1x'),  
+                        ('1.2', '1.2x'),  
+                        ('1.3', '1.3x'),  
+                        ('1.4', '1.4x'),  
+                        ('1.5', '1.5x'),  
+                    )  
+                ).description(  
+                    T(42819, 'Set the default playback speed for videos. Can be adjusted during playback using remote control.')  
+                ),
                 BoolSetting('player_official', T(33045, 'Behave like official Plex clients'), True).description(
                     T(33046, '')),
                 BoolUserSetting('preplay_preroll', T(34051, 'Movies: Play pre-rolls'), False).description(
