@@ -2521,7 +2521,24 @@ class PlexPlayer(xbmc.Player, signalsmixin.SignalsMixin):
         self.handler.setup(self.video.duration.asInt(), meta, offset, bifURL, title=self.video.grandparentTitle,
                            title2=self.video.title, seeking=seeking, chapters=self.video.chapters,
                            is_mapped=meta.isMapped)
-
+        
+        # 在现有的 introOffset 检查之后添加  
+        fixedSkipDuration = util.getSetting('auto_skip_fixed_duration', 0)  
+        if fixedSkipDuration > 0 and not offset:  
+            # 将秒转换为毫秒  
+            fixedSkipOffset = fixedSkipDuration * 1000  
+            
+            if meta.isTranscoded:  
+                # 对于转码流,修改URL中的offset参数  
+                util.DEBUG_LOG("固定跳过开头: {}秒", fixedSkipDuration)  
+                url = self.OFFSET_RE.sub(r"\g<1>{}".format(fixedSkipDuration), url)  
+                self.handler.dialog.baseOffset = fixedSkipOffset  
+                meta.playStart = fixedSkipDuration  
+            else:  
+                # 对于直接播放,使用seekOnStart  
+                util.DEBUG_LOG("播放开始后跳过: {}秒", fixedSkipDuration)  
+                self.handler.seekOnStart = fixedSkipOffset
+                
         # try to get an early intro offset so we can skip it if necessary
         introOffset = None
         if not offset:
