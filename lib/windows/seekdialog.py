@@ -27,6 +27,11 @@ from . import optionsdialog
 from .mixins.spoilers import SpoilersMixin
 from .mixins.subtitledl import PlexSubtitleDownloadMixin
 
+from lib.settings_util import getSetting
+
+# tempoup 每步对应的倍速增量（与 Kodi 默认一致）
+TEMPO_STEP = 0.1 
+
 KEY_MOVE_SET = frozenset(
     (
         xbmcgui.ACTION_MOVE_LEFT,
@@ -642,7 +647,157 @@ class SeekDialog(kodigui.BaseDialog, windowutils.GoHomeMixin, PlexSubtitleDownlo
         if reused:
             self.reuseDialog()
         self.update()
+        xbmc.log('[PLEXSPEED] setup() reached end, calling _applyDefaultPlaybackSpeed', xbmc.LOGINFO)
+        self._applyDefaultPlaybackSpeed()
 
+   def _applyDefaultPlaybackSpeed(self):
+        speed_idx = getSetting('playback_speed', 1.0)
+        steps = round((speed_idx - 1) / 0.1)
+        playback_speed = getSetting('playback_speed', 1.0)
+        xbmc.log('[PLEXSPEED] _applyDefaultPlaybackSpeed called | speed_idx={} steps={} target_speed={}'.format(
+            speed_idx, steps, playback_speed), xbmc.LOGINFO)
+
+        if steps == 0:
+            xbmc.log('[PLEXSPEED] steps=0, no adjustment needed', xbmc.LOGINFO)
+            return
+
+        target_speed = playback_speed
+        action = 'tempoup' if steps > 0 else 'tempodown'
+        total_steps = abs(steps)
+
+        # 检测重复调用
+        call_id = id(threading.current_thread())
+
+        def _apply():
+            xbmc.log('[PLEXSPEED] thread {} started | action={} total_steps={} target={}'.format(
+                call_id, action, total_steps, target_speed), xbmc.LOGINFO)
+
+            player = xbmc.Player()
+            for i in range(100):
+                if player.isPlaying():
+                    break
+                xbmc.sleep(100)
+            else:
+                xbmc.log('[PLEXSPEED] thread {}: TIMEOUT player never started'.format(call_id), xbmc.LOGWARNING)
+                return
+
+            # 等待 InfoLabel 稳定（不再是 "0.00" 或 ""）
+            for i in range(30):
+                speed_before = xbmc.getInfoLabel('Player.PlaySpeed')
+                if speed_before not in ('', '0.00', '0'):
+                    break
+                xbmc.sleep(100)
+            else:
+                speed_before = xbmc.getInfoLabel('Player.PlaySpeed')
+
+            xbmc.log('[PLEXSPEED] thread {} | speed_before="{}" (stable after {}x poll)'.format(
+                call_id, speed_before, i), xbmc.LOGINFO)
+
+            # 发送全部步骤
+            for step in range(total_steps):
+                xbmc.log('[PLEXSPEED] thread {} | step {}/{}: PlayerControl({})'.format(
+                    call_id, step + 1, total_steps, action), xbmc.LOGINFO)
+                try:
+                    builtin.PlayerControl(action)
+                except Exception as e:
+                    xbmc.log('[PLEXSPEED] step {} EXCEPTION: {}'.format(step + 1, e), xbmc.LOGERROR)
+                xbmc.sleep(200)
+
+            xbmc.sleep(800)
+            speed_after = xbmc.getInfoLabel('Player.PlaySpeed')
+            xbmc.log('[PLEXSPEED] thread {} | speed_after="{}"'.format(call_id, speed_after), xbmc.LOGINFO)
+
+            if speed_before != speed_after:
+                xbmc.log('[PLEXSPEED] thread {} | SUCCESS: {} → {}'.format(call_id, speed_before, speed_after), xbmc.LOGINFO)
+                return
+
+            xbmc.log('[PLEXSPEED] thread {} | PlayerControl had no effect, falling back to JSON-RPC'.format(call_id), xbmc.LOGWARNING)
+            self._setSpeedViaJSONRPC(target_speed)
+
+        threading.Thread(target=_apply, daemon=True).start()
+        xbmc.log('[PLEXSPEED] thread {} launched'.format(call_id), xbmc.LOGINFO)
+
+    def _setSpeedViaJSONRPC(self, target_speed: float) -> bool:
+        action_str = 'tempoup' if target_speed > 1.0 else 'tempodown'
+        steps = round(abs(target_speed - 1.0) / TEMPO_STEP)
+
+        # ── Level 1: float speed（Kodi 21+）──────────────────────────────
+        req = json.dumps({
+            "jsonrpc": "2.0", "method": "Player.SetSpeed",
+            "params": {"playerid": 1, "speed": target_speed}, "id": 1
+        })
+        raw = xbmc.executeJSONRPC(req)
+        xbmc.log('[PLEXSPEED] L1 SetSpeed({}) → {}'.format(target_speed, raw), xbmc.LOGINFO)
+        try:
+            resp = json.loads(raw)
+            if 'result' in resp:
+                actual = resp['result'].get('speed')
+                if actual is not None and abs(float(actual) - target_speed) < 0.05:
+                    xbmc.log('[PLEXSPEED] L1 succeeded, speed={}'.format(actual), xbmc.LOGINFO)
+                    return True
+                xbmc.log('[PLEXSPEED] L1 result speed={} != target={}'.format(actual, target_speed), xbmc.LOGWARNING)
+        except Exception:
+            pass
+
+        # ── Level 2: Input.ExecuteAction("tempoup/down") x N ─────────────
+        # 超时延长至 1.5s，适配 Android MediaCodec 的延迟
+        STEP_TIMEOUT = 1.5
+        xbmc.log('[PLEXSPEED] L2 Input.ExecuteAction({}) x{} steps'.format(action_str, steps), xbmc.LOGINFO)
+
+        speed_actually_changed = False
+        initial_speed = xbmc.getInfoLabel('Player.PlaySpeed')
+
+        for i in range(steps):
+            monitor = SpeedChangeMonitor()
+            monitor.speed_changed.clear()
+            monitor.reported_speed = None
+
+            req = json.dumps({
+                "jsonrpc": "2.0", "method": "Input.ExecuteAction",
+                "params": {"action": action_str}, "id": i + 1
+            })
+            raw = xbmc.executeJSONRPC(req)
+            xbmc.log('[PLEXSPEED] L2 step {}/{} → {}'.format(i + 1, steps, raw), xbmc.LOGINFO)
+
+            monitor.speed_changed.wait(timeout=STEP_TIMEOUT)
+
+            if monitor.reported_speed is not None:
+                xbmc.log('[PLEXSPEED] L2 step {} OnSpeedChanged speed={}'.format(i + 1, monitor.reported_speed), xbmc.LOGINFO)
+                # 关键验证：OnSpeedChanged 里的 speed 是否真的不是 1（即真正变速了）
+                try:
+                    if abs(float(monitor.reported_speed) - 1.0) > 0.05:
+                        speed_actually_changed = True
+                except Exception:
+                    pass
+            else:
+                xbmc.log('[PLEXSPEED] L2 step {} no OnSpeedChanged within {}s'.format(i + 1, STEP_TIMEOUT), xbmc.LOGWARNING)
+
+            xbmc.sleep(200)
+
+        if speed_actually_changed:
+            xbmc.log('[PLEXSPEED] L2 succeeded (speed actually changed)', xbmc.LOGINFO)
+            return True
+
+        xbmc.log(
+            '[PLEXSPEED] L2 failed: OnSpeedChanged fired but speed stayed at 1. '
+            'MediaCodec hardware decoder does not support tempo adjustment.',
+            xbmc.LOGERROR
+        )
+
+        # ── Level 3: 平台限制，放弃并通知用户 ────────────────────────────
+        xbmc.log('[PLEXSPEED] L3: platform limitation confirmed, notifying user', xbmc.LOGWARNING)
+        try:
+            import xbmcgui
+            xbmcgui.Dialog().notification(
+                'Playback Speed {}x'.format(playback_speed),
+                xbmcgui.NOTIFICATION_WARNING,
+                4000
+            )
+        except Exception as e:
+            xbmc.log('[PLEXSPEED] notification failed: {}'.format(e), xbmc.LOGWARNING)
+
+        return False
+        
     def update(self, offset=None, from_seek=False):
         if from_seek:
             self.fromSeek = time.time()
