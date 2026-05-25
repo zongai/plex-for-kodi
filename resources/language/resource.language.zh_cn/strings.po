@@ -1961,8 +1961,8 @@ msgstr "在库视图中，每次请求块请求的媒体项目数量（+6-30 取
 
 #: 
 msgctxt "#32973"
-msgid "Episodes: Skip Post Play screen"
-msgstr "剧集：跳过播放结束界面"
+msgid "Episodes: Continuous playback"
+msgstr "剧集：连续播放"
 
 #: 
 msgctxt "#32974"
@@ -2914,11 +2914,11 @@ msgid "Specifies the update mode. Will immediately check for a new version when 
 "Stable: Stable branch (faster than Repository)\n"
 "Repository: Kodi repository (official (slow) or Don't Panic)"
 msgstr "指定更新模式。更改并关闭设置时，将立即检查新版本。\n"
-"默认值：Repository\n"
+"默认值：仓库\n"
 "\n"
-"Beta: Bleeding edge (possibly unstable)\n"
-"Stable: Stable branch (faster than Repository)\n"
-"Repository: Kodi repository (official (slow) or Don't Panic)"
+"Beta：前沿版本（可能不稳定）\n"
+"Stable：稳定分支（更新速度快于仓库）\n"
+"Repository：Kodi 仓库（官方（较慢）或 Don't Panic）"
 
 #: 
 msgctxt "#33678"
@@ -2938,12 +2938,12 @@ msgstr "存储库"
 #: 
 msgctxt "#33683"
 msgid "Exit, download and install"
-msgstr ""
+msgstr "退出并下载安装"
 
 #: 
 msgctxt "#33684"
 msgid "Later"
-msgstr ""
+msgstr "稍后"
 
 #: 
 msgctxt "#32015"
@@ -3100,7 +3100,6 @@ msgstr "下载字幕： {}"
 msgctxt "#33701"
 msgid "Fallback to Kodi"
 msgstr "回退到 Kodi\n"
-"Fallback to Kodi"
 
 #: 
 msgctxt "#33702"
@@ -3140,7 +3139,7 @@ msgstr "隐藏摘要"
 #: 
 msgctxt "#33709"
 msgid "Show ratings for"
-msgstr ""
+msgstr "显示评分来源"
 
 #: 
 msgctxt "#33710"
@@ -3195,119 +3194,116 @@ msgstr "刷新元数据"
 #: 
 msgctxt "#33038"
 msgid "When encountering an intro marker with a start time offset greater than this, ignore it (default: 1400s/23m)"
-msgstr ""
+msgstr "当片头标记的开始时间偏移量大于此值时，忽略该标记（默认：1400秒/23分钟）"
 
 #: 
 msgctxt "#33649"
 msgid "\"Use alternate seek\" wait for seek"
-msgstr ""
+msgstr "「使用替代定位」定位等待时间"
 
 #: 
 msgctxt "#33650"
 msgid "This adjusts the delay between seek-tries on problematic platforms when \"Use alternate seek\" is enabled, which fixes resume not always working or double-seeking. When you have resume/double-seek issues, increase this. Default: 500ms"
-msgstr ""
+msgstr "当启用「使用替代定位」时，此项调整问题平台上两次定位尝试之间的延迟，可修复续播不稳定或重复定位的问题。如遇续播或重复定位问题，请增大此值。默认值：500ms"
 
 #: 
 msgctxt "#33667"
 msgid "Use alternate seek"
-msgstr ""
+msgstr "使用替代定位"
 
 #: 
 msgctxt "#33668"
 msgid "ATTENTION: Only enable this if you have reproducible audio issues after seeking/resuming.\n"
 "\n"
 "Use an alternative seek method in videos, which can help in problematic scenarios; brings its own issues/quirks. Disabled by default (enabled by default for CoreELEC and LG WebOS)"
-msgstr ""
-
-#: 
-msgctxt "#33720"
-msgid "Clear all caches"
-msgstr "清除所有缓存"
+msgstr "注意：仅在能稳定复现定位/续播后音频异常时启用此项。\n"
+"\n"
+"在视频中使用替代定位方式，可改善某些异常情况，但也可能引入其自身的问题或怪异行为。默认禁用（CoreELEC 和 LG WebOS 默认启用）"
 
 #: 
 msgctxt "#33721"
 msgid "Clear library cache (not items)"
-msgstr ""
+msgstr "清除媒体库缓存（不含条目）"
 
 #: 
 msgctxt "#33722"
 msgid "Libraries"
-msgstr ""
+msgstr "媒体库"
 
 #: 
 msgctxt "#33723"
 msgid "Media Items"
-msgstr ""
+msgstr "媒体条目"
 
 #: 
 msgctxt "#33724"
 msgid "Cache Plex data for"
-msgstr ""
+msgstr "缓存 Plex 数据"
 
 #: 
 msgctxt "#33725"
 msgid "Persist cached Plex data"
-msgstr ""
+msgstr "持久化 Plex 缓存数据"
 
 #: 
 msgctxt "#33726"
 msgid "Instead of clearing the cache when exiting the addon, persist it instead. Warning: You'll most likely encounter missing items in libraries or outdated data. Use the corresponding menu functionalities to clear the cache for specific items or libraries."
-msgstr ""
+msgstr "退出插件时保留缓存而非清除。警告：这可能导致媒体库中出现条目缺失或数据过期等问题。请使用对应的菜单功能来清除特定条目或媒体库的缓存。"
 
 #: 
 msgctxt "#33727"
 msgid "Store Plex server responses for items and library views in a local SQLite database. Doesn't cache anything else (Home/Hubs are always up to date). Massively speeds up consecutive visits to items and libraries. Certain important events, such as watch state changes, automatically delete the item cache and its corresponding library cache. (Default: Off)"
-msgstr ""
+msgstr "将 Plex 服务器对条目和媒体库视图的响应存储到本地 SQLite 数据库中。不缓存其他内容（主页/Hub 始终保持最新）。可大幅提升连续访问条目和媒体库的速度。某些重要事件（如观看状态变化）会自动删除对应条目及媒体库的缓存。（默认：关闭）"
 
 #: 
 msgctxt "#33728"
 msgid "Clear cache for item"
-msgstr ""
+msgstr "清除条目缓存"
 
 #: 
 msgctxt "#33729"
 msgid "Expire cached Plex data after (hours)"
-msgstr ""
+msgstr "Plex 缓存数据过期时间（小时）"
 
 #: 
 msgctxt "#33730"
 msgid "Randomly"
-msgstr ""
+msgstr "随机"
 
 #: 
 msgctxt "#33731"
 msgid "By Bitrate"
-msgstr ""
+msgstr "按码率"
 
 #: 
 msgctxt "#33732"
 msgid "Bitrate"
-msgstr ""
+msgstr "码率"
 
 #: 
 msgctxt "#33733"
 msgid "Transcode target codec"
-msgstr ""
+msgstr "转码目标编码格式"
 
 #: 
 msgctxt "#33734"
 msgid "Sets the target codec when transcoding/direct streaming. Overridden when \"Transcode audio to AC3\" is set."
-msgstr ""
+msgstr "设置转码或直接串流时的目标编码格式。启用「将音频转码为 AC3」时此项将被覆盖。"
 
 #: 
 msgctxt "#33735"
 msgid "Always auto-start"
-msgstr ""
+msgstr "始终自动启动"
 
 #: 
 msgctxt "#33736"
 msgid "By default PM4K won't auto-start when the current window isn't a Home-derived window (e.g.: Settings). Enable this if you always want to auto-start PM4K regardless of the current window. Can also improve start-up time."
-msgstr ""
+msgstr "默认情况下，当前窗口不是主页衍生窗口（如设置页面）时，PM4K 不会自动启动。如需无论当前窗口如何都自动启动 PM4K，请启用此项。此项也可改善启动速度。"
 
 #: 
 msgctxt "#33737"
 msgid "Loop theme music"
-msgstr ""
+msgstr "循环播放主题音乐"
 
 #: 
 msgctxt "#33671"
@@ -3316,250 +3312,428 @@ msgid "Current: {current_version}\n"
 "\n"
 "Changelog:\n"
 "{changelog}"
-msgstr ""
+msgstr "当前版本：{current_version}\n"
+"新版本：{new_version}\n"
+"\n"
+"更新日志：\n"
+"{changelog}"
 
 #: 
 msgctxt "#33738"
 msgid "Max playlist size"
-msgstr ""
+msgstr "播放列表最大条目数"
 
 #: 
 msgctxt "#33739"
 msgid "How many items to load into a Kodi playlist before chunking them remotely using Plex PlayQueues (default: 500); Reduce on memory issues/crashes."
-msgstr ""
+msgstr "在使用 Plex PlayQueues 进行远程分块之前，加载到 Kodi 播放列表中的最大条目数（默认：500）。如遇内存问题或崩溃，请降低此值。"
 
 #: 
 msgctxt "#33740"
 msgid "Home: Episodes season thumbnails"
-msgstr ""
+msgstr "主页：剧集季缩略图"
 
 #: 
 msgctxt "#33741"
 msgid "Use season thumbnails/posters when displaying episodes in hubs instead of the TV show's."
-msgstr ""
+msgstr "在 Hub 中显示剧集时，使用季缩略图/海报代替剧集封面。"
 
 #: 
 msgctxt "#34000"
 msgid "Watchlist"
-msgstr ""
+msgstr "想看列表"
 
 #: 
 msgctxt "#34001"
 msgid "Released"
-msgstr ""
+msgstr "已上映"
 
 #: 
 msgctxt "#34002"
 msgid "Movies & Shows"
-msgstr ""
+msgstr "电影与剧集"
 
 #: e.g.: 8 seasons
 msgctxt "#34003"
 msgid "{} seasons"
-msgstr ""
+msgstr "{} 季"
 
 #: 
 msgctxt "#34004"
 msgid "Choose server"
-msgstr ""
+msgstr "选择服务器"
 
 #: 
 msgctxt "#34005"
 msgid "Availability"
-msgstr ""
+msgstr "可用性"
 
 #: e.g.: 1 season
 msgctxt "#34006"
 msgid "{} season"
-msgstr ""
+msgstr "{} 季"
 
 #: 
 msgctxt "#34007"
 msgid "Use Watchlist"
-msgstr ""
+msgstr "使用想看列表"
 
 #: 
 msgctxt "#34008"
 msgid "Activates the current user's Plex watchlist as a section item. Adds watchlist functionality to certain media screens. Per-user setting. Default: On"
-msgstr ""
+msgstr "将当前用户的 Plex 想看列表作为分区条目启用，并在部分媒体页面中添加想看列表功能。按用户设置。默认：开启"
 
 #: 
 msgctxt "#34009"
 msgid "Watchlist auto-remove"
-msgstr ""
+msgstr "想看列表自动移除"
 
 #: 
 msgctxt "#34010"
 msgid "Automatically remove fully watched items from watchlist. Default: On"
-msgstr ""
+msgstr "自动将已全部看完的内容从想看列表中移除。默认：开启"
 
 #: 
 msgctxt "#34011"
 msgid "Remove from watchlist"
-msgstr ""
+msgstr "从想看列表中移除"
 
 #: 
 msgctxt "#34012"
 msgid "Fast pause/resume"
-msgstr ""
+msgstr "快速暂停/续播"
 
 #: 
 msgctxt "#34013"
 msgid "when paused"
-msgstr ""
+msgstr "暂停时"
 
 #: 
 msgctxt "#34014"
 msgid "when playing"
-msgstr ""
+msgstr "播放时"
 
 #: 
 msgctxt "#34015"
 msgid "User-specific. Use OK/ENTER button to pause instead of showing the OSD (which can then only be accessed using DOWN), or resume when paused. Only works with 'Behave like official Plex clients' enabled."
-msgstr ""
+msgstr "按用户设置。使用确认/回车键直接暂停（而非弹出 OSD，OSD 此时只能通过向下键访问），或在暂停时续播。仅在启用「模拟官方 Plex 客户端行为」时有效。"
 
 #: 
 msgctxt "#34016"
 msgid "Max shutdown wait"
-msgstr ""
+msgstr "最长关闭等待时间"
 
 #: 
 msgctxt "#34017"
 msgid "The plugin will try to hard exit once this time limit is reached (default: 5 seconds)"
-msgstr ""
+msgstr "插件将在达到此时间限制后强制退出（默认：5 秒）"
 
 #: 
 msgctxt "#34018"
 msgid "Related Media"
-msgstr ""
+msgstr "相关内容"
 
 #: watchlist discover hub title prefix
 msgctxt "#34019"
 msgid "Discover: {}"
-msgstr ""
+msgstr "发现：{}"
 
 #: 
 msgctxt "#34020"
 msgid "Loading external hubs"
-msgstr ""
+msgstr "正在加载外部 Hub"
 
 #: 
 msgctxt "#34021"
 msgid "Please wait ..."
-msgstr ""
+msgstr "请稍候……"
 
 #: 
 msgctxt "#34022"
 msgid "Video play completion behaviour"
-msgstr ""
+msgstr "视频播放完成行为"
 
 #: 
 msgctxt "#34023"
 msgid "Decide whether to use end credits markers to determine the 'watched' state of video items. When markers are not available the selected threshold percentage will be used."
-msgstr ""
+msgstr "决定是否使用片尾字幕标记来判断视频条目的「已观看」状态。当标记不可用时，将使用所选的阈值百分比。"
 
 #: 
 msgctxt "#34024"
 msgid "at selected threshold percentage"
-msgstr ""
+msgstr "达到所选阈值百分比时"
 
 #: 
 msgctxt "#34025"
 msgid "at final credits marker position"
-msgstr ""
+msgstr "到达最后一个片尾字幕标记位置时"
 
 #: 
 msgctxt "#34026"
 msgid "at first credits marker position"
-msgstr ""
+msgstr "到达第一个片尾字幕标记位置时"
 
 #: 
 msgctxt "#34027"
 msgid "earliest between threshold percent and first credits marker"
-msgstr ""
-
-#: 
-msgctxt "#32973"
-msgid "Episodes: Continuous playback"
-msgstr ""
+msgstr "阈值百分比与第一个片尾字幕标记中较早者"
 
 #: 
 msgctxt "#34028"
 msgid "\"Use alternate seek\" valid seek window"
-msgstr ""
+msgstr "「使用替代定位」有效定位窗口"
 
 #: 
 msgctxt "#34029"
 msgid "When \"Use alternate seek\" is enabled, any seek amount outside of this threshold window will be applied, otherwise the seek attempt will be ignored. If you encounter any seek issues, play with this value (ms, default: 2000)"
-msgstr ""
+msgstr "启用「使用替代定位」时，超出此阈值窗口的定位量才会被执行，否则定位请求将被忽略。如遇定位问题，请调整此值（毫秒，默认：2000）"
 
 #: 
 msgctxt "#34030"
 msgid "Unlock Direct Play for above 4K"
-msgstr ""
+msgstr "解锁 4K 以上内容的直接播放"
 
 #: 
 msgctxt "#34031"
 msgid "Producer"
-msgstr ""
+msgstr "制片人"
 
 #: 
 msgctxt "#34032"
 msgid "Audio Language"
-msgstr ""
+msgstr "音频语言"
 
 #: 
 msgctxt "#34033"
 msgid "Subtitle Language"
-msgstr ""
+msgstr "字幕语言"
 
 #: 
 msgctxt "#34034"
 msgid "Folder Location"
-msgstr ""
+msgstr "文件夹路径"
 
 #: 
 msgctxt "#34035"
 msgid "Editions"
-msgstr ""
+msgstr "版本"
 
 #: 
 msgctxt "#34036"
 msgid "DOVI"
-msgstr ""
+msgstr "杜比视界"
 
 #: 
 msgctxt "#34037"
 msgid "HDR"
-msgstr ""
+msgstr "HDR"
 
 #: 
 msgctxt "#34038"
 msgid "Force plex.direct mapping"
-msgstr ""
+msgstr "强制 plex.direct 映射"
 
 #: 
 msgctxt "#34039"
 msgid "If you (still) don't see any posters: Under certain circumstances when Kodi still can't resolve hostnames when loading assets, even though the host resolves natively, enable this to force plex.direct mapping via advancedsettings.xml."
-msgstr ""
+msgstr "如果（仍然）看不到任何海报：在某些情况下，即使主机可以本地解析，Kodi 在加载资源时仍无法解析主机名，请启用此项以通过 advancedsettings.xml 强制使用 plex.direct 映射。"
 
 #: 
 msgctxt "#34040"
 msgid "By Progress"
-msgstr ""
+msgstr "按进度"
 
 #: 
 msgctxt "#34041"
 msgid "Progress"
-msgstr ""
+msgstr "进度"
 
 #: 
 msgctxt "#34042"
 msgid "By Album"
-msgstr ""
+msgstr "按专辑"
 
 #: 
 msgctxt "#34043"
 msgid "Album"
-msgstr ""
+msgstr "专辑"
 
+msgctxt "#34044"
+msgid "UI wait poll rate (Hz)"
+msgstr "界面等待轮询频率（Hz）"
+
+msgctxt "#34045"
+msgid "When waiting for certain events to occur, wait this long. Default: 10 Hz. With a decent device try 100 Hz, it should feel snappier in certain situations."
+msgstr "等待特定事件发生时的轮询频率。默认：10 Hz。若设备性能较好，可尝试 100 Hz，某些情况下响应会更灵敏。"
+
+msgctxt "#34046"
+msgid "Fade theme music in/out"
+msgstr "主题音乐淡入/淡出"
+
+msgctxt "#34047"
+msgid "Cache theme music"
+msgstr "缓存主题音乐"
+
+msgctxt "#34048"
+msgid "Cache theme music locally instead of streaming it directly"
+msgstr "在本地缓存主题音乐，而非直接串流播放"
+
+msgctxt "#34049"
+msgid "Seek back on start"
+msgstr "启动时回退定位"
+
+msgctxt "#34050"
+msgid "Issue a quick seek forward then back to the start of the video, when we start fresh (no resume point, no marker to immediately skip). Can fix A/V desync issues (e.g. CoreELEC on Ugoos with passthrough) and embedded subtitles showing late, with certain setups. Only for DirectPlay. This still requires a sensible value for \"Delay after change of refresh rate\" in Kodi (default: Off, CE/LG: On)"
+msgstr "在全新开始播放时（无续播点、无需立即跳过的标记），先快速向前定位再回到视频开头。可修复某些配置下的音画不同步问题（如 Ugoos 设备上 CoreELEC 使用直通模式）以及内嵌字幕显示延迟的问题。仅适用于直接播放。此功能仍需在 Kodi 中为「刷新率切换后的延迟」设置合理的值。（默认：关闭，CE/LG：开启）"
+
+msgctxt "#34051"
+msgid "Movies: Play pre-rolls"
+msgstr "电影：播放片头广告"
+
+msgctxt "#34052"
+msgid "Plays pre-roll clips (server-defined) before playing a movie without a resume point. User-specific."
+msgstr "在播放无续播点的电影前，播放片头广告片段（由服务器定义）。按用户设置。"
+
+msgctxt "#34053"
+msgid "Cinema Trailers to Play Before Movies"
+msgstr "电影前播放的院线预告片数量"
+
+msgctxt "#34054"
+msgid "Play pre-rolls before trailers"
+msgstr "在预告片前播放片头广告"
+
+msgctxt "#34055"
+msgid "Official Plex clients play the trailers first, then the preroll clips. Enabling this will do the opposite. Default: On. User-specific."
+msgstr "官方 Plex 客户端先播放预告片，再播放片头广告。启用此项后顺序相反。默认：开启。按用户设置。"
+
+msgctxt "#34056"
+msgid "\"Use alternate seek\" prefer reported time"
+msgstr "「使用替代定位」优先使用上报时间"
+
+msgctxt "#34057"
+msgid "Use reported seek time instead of the current player time (usually more accurate); Default: On"
+msgstr "使用上报的定位时间而非当前播放器时间（通常更准确）。默认：开启"
+
+msgctxt "#34058"
+msgid "\"Use alternate seek\" wait for valid player time"
+msgstr "「使用替代定位」等待有效的播放器时间"
+
+msgctxt "#34059"
+msgid "The player time reporting might be inaccurate on playback start. Wait for a valid player time before seeking; Default: On"
+msgstr "播放开始时播放器的时间上报可能不准确。定位前等待获取有效的播放器时间。默认：开启"
+
+msgctxt "#34060"
+msgid "Blackout screen during initial seek"
+msgstr "初始定位期间黑屏"
+
+msgctxt "#34061"
+msgid "Show directors in cast lists"
+msgstr "在演职员列表中显示导演"
+
+msgctxt "#34062"
+msgid "Ensure Kodi Addon position"
+msgstr "确保 Kodi 插件位置记录"
+
+msgctxt "#34063"
+msgid "When not run from the Program addons section, our lastused value will not be updated. Make sure it does when the addon exits."
+msgstr "当不从程序插件分区启动时，插件的最后使用时间不会被更新。此项确保插件退出时正确更新该记录。"
+
+msgctxt "#34064"
+msgid "Return to Home on Screensaver"
+msgstr "屏保启动时返回主页"
+
+msgctxt "#34065"
+msgid "When Kodi starts its screensaver, and we are in a library view, return to home. This saves idle energy as the library views are very heavy on the CPU even on idle due to a Kodi bug."
+msgstr "当 Kodi 启动屏保时，若正处于媒体库视图，则自动返回主页。由于 Kodi 的一个缺陷，媒体库视图即便在空闲状态下也会大量占用 CPU，此项可节省待机能耗。"
+
+msgctxt "#34066"
+msgid "Seamless branching LAV mode (CoreELEC U3k B9+, avdvplus, p3i)"
+msgstr "无缝分支 LAV 模式（CoreELEC U3k B9+、avdvplus、p3i）"
+
+msgctxt "#34067"
+msgid "LAV filter mode for seamless branching movies with TrueHD/JOC. Auto-applied to known movies. Default: LAV SB (4)"
+msgstr "含 TrueHD/JOC 音轨的无缝分支电影所使用的 LAV 滤镜模式。对已知影片自动应用。默认：LAV SB（4）"
+
+msgctxt "#34068"
+msgid "Off (0)"
+msgstr "关闭（0）"
+
+msgctxt "#34069"
+msgid "Seek/Sync (1)"
+msgstr "定位/同步（1）"
+
+msgctxt "#34070"
+msgid "Debug (3)"
+msgstr "调试（3）"
+
+msgctxt "#34071"
+msgid "LAV SB (4) - Recommended"
+msgstr "LAV SB（4）- 推荐"
+
+msgctxt "#34072"
+msgid "LAV Full (5)"
+msgstr "LAV 完整（5）"
+
+msgctxt "#34073"
+msgid "Seamless branching fix"
+msgstr "无缝分支修复"
+
+msgctxt "#34074"
+msgid "Automatically temporarily activate LAV Full or SB mode in CoreELEC on supported builds to alleviate audio dropouts on certain titles, if necessary. Based on \"seamless_branching.json\", can be user-amended by putting a file with the same name and structure into userdata/addon_data/script.plexmod."
+msgstr "在必要时，自动在支持的 CoreELEC 版本上临时启用 LAV Full 或 SB 模式，以解决特定影片的音频中断问题。基于「seamless_branching.json」，用户可将同名同结构的文件放入 userdata/addon_data/script.plexmod 目录进行自定义修改。"
+
+msgctxt "#34075"
+msgid "Resume offset adjustment"
+msgstr "续播偏移量调整"
+
+msgctxt "#34076"
+msgid "When resuming media with a resume point, negatively adjust it by this amount of milliseconds to avoid lost content due to keyframes/seek behaviour. Default: -3.5s"
+msgstr "续播有进度记录的媒体时，将续播点向前偏移指定的毫秒数，以避免因关键帧或定位行为导致内容丢失。默认：-3.5秒"
+
+msgctxt "#34077"
+msgid "{} successfully removed from Watchlist"
+msgstr "已成功将 {} 从想看列表中移除"
+
+msgctxt "#34078"
+msgid "Seek back on start delay between seeks"
+msgstr "启动时回退定位的两次定位间隔"
+
+msgctxt "#34079"
+msgid "How long should we wait when executing Seek back on start, after having seeked forwards temporarily, before seeking back? Setting this higher could resolve decoder initialisation issues. Default: 500ms"
+msgstr "执行「启动时回退定位」时，在临时向前定位后，回退之前需要等待多长时间？增大此值可能有助于解决解码器初始化问题。默认：500ms"
+
+#:
+msgctxt "#35001"
+msgid "Combine video & virtual chapters"
+msgstr "合并视频章节与虚拟章节"
+
+#:
+msgctxt "#35002"
+msgid "Combine video & virtual chapters when both are available."
+msgstr "当视频章节与虚拟章节同时存在时，将两者合并显示。"
+
+#:
+msgctxt "#42814"
+msgid "Auto-skip fixed duration at start"
+msgstr "自动跳过开头固定时长"
+
+#:
+msgctxt "#42815"
+msgid "Automatically skip a fixed number of seconds at the beginning of videos. Set to 0 to disable."
+msgstr "自动跳过视频开头指定的秒数。设置为0则禁用此功能。"
+
+msgctxt "#42816"
+msgid "Show key codes on screen"
+msgstr "在屏幕上显示按键代码"
+
+msgctxt "#42817"
+msgid "Display button codes on screen during playback for debugging purposes."
+msgstr "在播放过程中在屏幕上显示按键代码，用于调试"
+
+msgctxt "#42818"
+msgid "Default playback speed"
+msgstr "默认播放速度"
+
+msgctxt "#42819"
+msgid "Set the default playback speed for videos. Can be adjusted during playback using remote control."
+msgstr "设置视频的默认播放速度。可在播放过程中使用遥控器进行调整。"
