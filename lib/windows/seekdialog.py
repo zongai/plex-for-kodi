@@ -1055,6 +1055,12 @@ class SeekDialog(kodigui.BaseDialog, windowutils.GoHomeMixin, PlexSubtitleDownlo
                 elif action.getButtonCode() == 323715:
                     # Alt-right
                     builtin.PlayerControl('tempoup')
+                elif action == xbmcgui.ACTION_MOVE_UP:  
+                    # 加速  
+                    builtin.PlayerControl('tempoup')  
+                elif action == xbmcgui.ACTION_MOVE_DOWN:  
+                    # 减速  
+                    builtin.PlayerControl('tempodown')
                 elif action == xbmcgui.ACTION_NEXT_ITEM:
                     self.prepareNewPlayback(queuing_next=True, ignore_tick=True)
                     self.player.trigger("action", action="next")
